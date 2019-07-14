@@ -2,6 +2,7 @@ package de.sappich.springsecuritydemo.user;
 
 import de.sappich.springsecuritydemo.auth.CustomUserDetailsService;
 import de.sappich.springsecuritydemo.dto.ResponseMessage;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ public class RegisterController {
     }
 
     @PostMapping("register/superuser")
+    @Scope(scopeName = "development")
     public ResponseEntity<ResponseMessage> registerAdmin(@RequestBody UserRegisterDto userRegisterDto) {
         final CustomUser customUser = createUser(userRegisterDto);
         final String username = this.userDetailsService.saveUserAdmin(customUser);

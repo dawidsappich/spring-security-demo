@@ -1,4 +1,4 @@
-package de.sappich.springsecuritydemo.admin;
+package de.sappich.springsecuritydemo.auth;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

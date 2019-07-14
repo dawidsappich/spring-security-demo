@@ -1,6 +1,6 @@
 package de.sappich.springsecuritydemo.user;
 
-import de.sappich.springsecuritydemo.admin.Authority;
+import de.sappich.springsecuritydemo.auth.Authority;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -12,7 +12,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,7 +36,7 @@ public class CustomUser {
     private ZonedDateTime modified;
     private boolean isEnabled = true;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
 

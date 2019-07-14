@@ -3,6 +3,7 @@ package de.sappich.springsecuritydemo.auth;
 import de.sappich.springsecuritydemo.user.CustomUser;
 import de.sappich.springsecuritydemo.user.UserRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,4 +75,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return saveUser(customUser);
     }
 
+    public Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {
+        final UserDetails userDetails = loadUserByUsername(username);
+        return userDetails.getAuthorities();
+    }
 }

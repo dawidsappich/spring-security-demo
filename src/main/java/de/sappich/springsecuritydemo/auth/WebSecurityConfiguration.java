@@ -11,10 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // all requests must be authenticated
         http.authorizeRequests()
                 .mvcMatchers("/admin")
-                .hasRole("ADMIN")
+                .hasAuthority("ADMIN")
                 .anyRequest().authenticated();
     }
 
@@ -65,7 +62,8 @@ class CustomerAuthProvider implements AuthenticationProvider {
         final String password = authentication.getCredentials().toString();
 
         if (userDetailsService.matches(username, password)) {
-            return new UsernamePasswordAuthenticationToken(username, password, Collections.singletonList(new SimpleGrantedAuthority("USER")));
+            final var grantedAuthorities = userDetailsService.getGrantedAuthorities(username);
+            return new UsernamePasswordAuthenticationToken(username, password, grantedAuthorities);
         }
         throw new BadCredentialsException("username or password invalid");
     }
