@@ -10,8 +10,15 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "username": "dawid",
+  "username": "test@test.de",
   "password": "test"
 }
+
+###
+
+GET http://localhost:8080/user/me
+Accept: application/json
+Authorization: Basic test@test.de test
+
 
 ###
