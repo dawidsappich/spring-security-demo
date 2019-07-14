@@ -16,9 +16,20 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:8080/register/superuser
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "dawid@test.de",
+  "password": "test"
+}
+
+###
+
 GET http://localhost:8080/user/me
 Accept: application/json
-Authorization: Basic test@test.de test
+Authorization: Basic dawid@test.de test
 
 
 ###

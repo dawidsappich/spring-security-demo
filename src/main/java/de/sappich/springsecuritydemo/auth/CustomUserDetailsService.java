@@ -33,10 +33,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         return null;
     }
 
-    public User saveUser(User user) {
+    public @NotNull @NotBlank String saveUser(User user) {
         // encode the password
+        user.addAuthority("USER");
         user.setPassword(passwordEncoder().encode(user.getPassword()));
-        return this.repository.save(user);
+        final User savedUser = this.repository.save(user);
+        return savedUser.getUsername();
     }
 
     public boolean matches(String username, String password) {
@@ -48,4 +50,10 @@ public class CustomUserDetailsService implements UserDetailsService {
             return passwordEncoder().matches(password, userPassword);
         }
     }
+
+    public String saveUserAdmin(User user) {
+        user.addAuthority("ADMIN");
+        return saveUser(user);
+    }
+
 }

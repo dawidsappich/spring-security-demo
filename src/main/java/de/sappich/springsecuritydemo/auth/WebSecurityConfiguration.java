@@ -41,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     // exclude the register endpoint from security
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/register", "/h2-console");
+        web.ignoring().mvcMatchers("/register/**", "/h2-console");
     }
 
     @Override
