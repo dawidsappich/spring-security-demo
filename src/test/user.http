@@ -33,3 +33,9 @@ Authorization: Basic dawid@test.de test
 
 
 ###
+
+GET http://localhost:8080/admin
+Accept: application/json
+Authorization: Basic dawid@test.de test
+
+###

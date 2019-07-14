@@ -19,7 +19,8 @@ import java.util.stream.Stream;
 @Entity
 @Data
 @NoArgsConstructor
-public class User {
+@Table(name = "users")
+public class CustomUser {
 
     @Id
     @GeneratedValue(generator = "system-uuid")

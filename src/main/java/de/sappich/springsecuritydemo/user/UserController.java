@@ -19,9 +19,9 @@ public class UserController {
     }
 
     @GetMapping("me")
-    public ResponseEntity<User> userInfos(Principal principal) {
+    public ResponseEntity<CustomUser> userInfos(Principal principal) {
         final String username = principal.getName();
-        final Optional<User> user = repository.findByUsername(username);
+        final Optional<CustomUser> user = repository.findByUsername(username);
         return ResponseEntity.ok(user.get());
     }
 }

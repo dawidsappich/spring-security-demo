@@ -34,7 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // all requests must be authenticated
         http.authorizeRequests()
                 .mvcMatchers("/admin")
-                .hasAuthority("ADMIN")
+                .hasRole("ADMIN")
                 .anyRequest().authenticated();
     }
 

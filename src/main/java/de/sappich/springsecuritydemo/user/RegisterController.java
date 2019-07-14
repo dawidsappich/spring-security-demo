@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 @RestController
 public class RegisterController {
 
@@ -17,15 +14,15 @@ public class RegisterController {
 
     @PostMapping("register")
     public ResponseEntity<ResponseMessage> registerUser(@RequestBody UserRegisterDto userRegisterDto) {
-        final User user = createUser(userRegisterDto);
-        final String username = this.userDetailsService.saveUser(user);
+        final CustomUser customUser = createUser(userRegisterDto);
+        final String username = this.userDetailsService.saveUser(customUser);
         return ResponseEntity.ok(createResponseMessage(username));
     }
 
     @PostMapping("register/superuser")
     public ResponseEntity<ResponseMessage> registerAdmin(@RequestBody UserRegisterDto userRegisterDto) {
-        final User user = createUser(userRegisterDto);
-        final String username = this.userDetailsService.saveUserAdmin(user);
+        final CustomUser customUser = createUser(userRegisterDto);
+        final String username = this.userDetailsService.saveUserAdmin(customUser);
         return ResponseEntity.ok(createResponseMessage(username));
     }
 
@@ -37,10 +34,10 @@ public class RegisterController {
         this.userDetailsService = userDetailsService;
     }
 
-    private User createUser(UserRegisterDto userRegisterDto) {
-        final User user = new User();
-        user.setUsername(userRegisterDto.getUsername());
-        user.setPassword(userRegisterDto.getPassword());
-        return user;
+    private CustomUser createUser(UserRegisterDto userRegisterDto) {
+        final CustomUser customUser = new CustomUser();
+        customUser.setUsername(userRegisterDto.getUsername());
+        customUser.setPassword(userRegisterDto.getPassword());
+        return customUser;
     }
 }

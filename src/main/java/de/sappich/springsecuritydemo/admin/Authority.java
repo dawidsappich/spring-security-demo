@@ -1,12 +1,10 @@
 package de.sappich.springsecuritydemo.admin;
 
-import de.sappich.springsecuritydemo.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
